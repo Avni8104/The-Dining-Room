@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Dining Room - Premium restaurant with table booking, food delivery, and event hosting services">
+    <title>The Dining Room - Fine Dining Experience</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Gorditas -->
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <style>
+        :root {
+            --off-white: #f8f4e9;
+            --orange: #ff7b25;
+            --orange-light: rgba(255, 123, 37, 0.3);
+            --orange-lighter: rgba(255, 123, 37, 0.1);
+            --dark: #333;
+            --gray: #6c757d;
+            --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --nav-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--off-white);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background Animation Elements */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--orange-light);
+            opacity: 0;
+            animation: float 15s infinite linear;
+            filter: blur(40px);
+        }
+        
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+        
+        .circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            left: 25%;
+            animation-delay: 2s;
+            animation-duration: 15s;
+        }
+        
+        .circle:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 70%;
+            animation-delay: 4s;
+            animation-duration: 25s;
+        }
+        
+        .circle:nth-child(4) {
+            width: 250px;
+            height: 250px;
+            top: 80%;
+            left: 80%;
+            animation-delay: 6s;
+            animation-duration: 18s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--off-white);
+            box-shadow: var(--nav-shadow);
+            padding: 0.5rem 2rem;
+            font-family: 'Gorditas', cursive;
+            transition: var(--nav-transition);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 2rem;
+            background-color: rgba(248, 244, 233, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--orange);
+            display: flex;
+            align-items: center;
+            transition: var(--nav-transition);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.03);
+            text-shadow: 0 2px 4px rgba(255, 123, 37, 0.2);
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: var(--nav-transition);
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px var(--orange-light);
+            outline: none;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 123, 37, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            transition: var(--nav-transition);
+        }
+        
+        .navbar-toggler:hover .navbar-toggler-icon {
+            transform: rotate(90deg);
+        }
+        
+        .nav-item {
+            position: relative;
+            margin: 0 0.3rem;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            font-weight: 600;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            transition: var(--nav-transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--orange);
+            border-radius: 3px;
+            transition: var(--nav-transition);
+        }
+        
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--orange);
+            background-color: var(--orange-lighter);
+            outline: none;
+        }
+        
+        .nav-link:hover::before,
+        .nav-link:focus::before {
+            width: 60%;
+        }
+        
+        .nav-link.active {
+            color: var(--orange);
+            font-weight: 700;
+        }
+        
+        .nav-link.active::before {
+            width: 60%;
+            background-color: var(--orange);
+        }
+        
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+            transition: var(--nav-transition);
+        }
+        
+        .nav-link:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Navigation Buttons */
+        .btn-login {
+            background-color: transparent;
+            color: var(--orange);
+            border: 2px solid var(--orange);
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 700;
+            transition: var(--nav-transition);
+            margin: 0 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-login:hover,
+        .btn-login:focus {
+            background-color: var(--orange);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 123, 37, 0.3);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .btn-signup {
+            background-color: var(--orange);
+            color: white;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 700;
+            transition: var(--nav-transition);
+            border: 2px solid var(--orange);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-signup:hover,
+        .btn-signup:focus {
+            background-color: #e66a1a;
+            border-color: #e66a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 123, 37, 0.3);
+        }
+        
+        .btn-signup:active {
+            transform: translateY(0);
+        }
+        
+        /* Button hover effects */
+        .btn-login::before,
+        .btn-signup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-login:hover::before,
+        .btn-signup:hover::before {
+            left: 100%;
+        }
+        
+        /* Center the navigation links */
+        .navbar-nav {
+            align-items: center;
+        }
+        
+        /* Dropdown menu styling */
+        .dropdown-menu {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            display: block;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        
+        .dropdown-item {
+            padding: 0.5rem 1.5rem;
+            transition: var(--nav-transition);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--orange);
+            transition: all 0.3s;
+        }
+        
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: var(--orange-lighter);
+            color: var(--orange);
+        }
+        
+        .dropdown-item:hover::before {
+            left: 0;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.5) 100%);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .hero:hover::after {
+            opacity: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .hero.loaded .hero-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+        }
+        
+        .hero:hover h1 {
+            transform: scale(1);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transform: translateY(10px);
+            transition: all 0.5s ease 0.2s;
+        }
+        
+        .hero.loaded p {
+            transform: translateY(0);
+        }
+        
+        .btn-hero {
+            background-color: var(--orange);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.4s;
+        }
+        
+        .hero.loaded .btn-hero {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .btn-hero:hover {
+            background-color: #e66a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-hero:hover::before {
+            left: 100%;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--orange);
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            height: 100%;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .service-card.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 123, 37, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .service-card:hover .service-img::after {
+            opacity: 1;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 2rem;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+        
+        .service-card:hover .service-content h3 {
+            color: var(--orange);
+        }
+        
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--orange);
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: rotate(15deg) scale(1.2);
+        }
+        
+        /* Featured Restaurants Section */
+        .featured-restaurants {
+            padding: 5rem 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .restaurant-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            background: var(--off-white);
+            transform: translateY(50px);
+            opacity: 0;
+            height: 100%;
+        }
+        
+        .restaurant-card.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .restaurant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .restaurant-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .restaurant-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 123, 37, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .restaurant-card:hover .restaurant-img::after {
+            opacity: 1;
+        }
+        
+        .restaurant-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .restaurant-card:hover .restaurant-img img {
+            transform: scale(1.1);
+        }
+        
+        .restaurant-content {
+            padding: 1.5rem;
+        }
+        
+        .restaurant-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .restaurant-card:hover .restaurant-content h3 {
+            color: var(--orange);
+        }
+        
+        .restaurant-type {
+            font-size: 0.9rem;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .rating {
+            color: #ffc107;
+            margin-bottom: 0.8rem;
+        }
+        
+        .restaurant-content p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .restaurant-location {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .restaurant-location i {
+            color: var(--orange);
+            margin-right: 5px;
+        }
+        
+        /* Featured Menu Section */
+        .featured-menu {
+            padding: 5rem 0;
+            background-color: var(--off-white);
+            position: relative;
+        }
+        
+        .menu-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            background: white;
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        
+        .menu-card.animate {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .menu-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 123, 37, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .menu-card:hover .menu-img::after {
+            opacity: 1;
+        }
+        
+        .menu-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .menu-card:hover .menu-img img {
+            transform: scale(1.1);
+        }
+        
+        .menu-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .menu-card:hover .menu-content h3 {
+            color: var(--orange);
+        }
+        
+        .menu-content p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--orange);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .menu-card:hover .price {
+            transform: scale(1.1);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        
+        .testimonial-card.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--orange);
+            opacity: 0.5;
+            position: absolute;
+        }
+        
+        .testimonial-text::before {
+            top: -15px;
+            left: -10px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -25px;
+            right: -10px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+            border: 3px solid var(--orange);
+            transition: transform 0.3s;
+        }
+        
+        .testimonial-card:hover .author-img {
+            transform: rotate(10deg);
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .testimonial-card:hover .author-info h4 {
+            color: var(--orange);
+        }
+        
+        .author-info p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        /* Call to Action */
+        .cta {
+            padding: 5rem 0;
+            background-color: var(--orange);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 6s infinite;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.5s;
+        }
+        
+        .cta:hover h2 {
+            transform: scale(1);
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            opacity: 0.9;
+        }
+        
+        .btn-cta {
+            background-color: white;
+            color: var(--orange);
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 2px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-cta:hover {
+            background-color: transparent;
+            color: white;
+        }
+        
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-cta:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            position: relative;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .footer-logo:hover {
+            transform: rotate(-5deg);
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--orange);
+            transform: translateY(-3px) rotate(10deg);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--orange);
+            transition: width 0.3s;
+        }
+        
+        .footer-links h3:hover::after {
+            width: 60px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--orange);
+            transform: translateX(5px);
+        }
+        
+        .footer-contact p {
+            color: #aaa;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            transition: color 0.3s;
+        }
+        
+        .footer-contact p:hover {
+            color: white;
+        }
+        
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--orange);
+            margin-top: 3px;
+            transition: transform 0.3s;
+        }
+        
+        .footer-contact p:hover i {
+            transform: rotate(15deg);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--orange);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background-color: #e66a1a;
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .navbar-nav {
+                padding-top: 1rem;
+            }
+            
+            .navbar-buttons {
+                margin-top: 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .btn-login, .btn-signup {
+                width: 100%;
+                margin: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                height: 80vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                height: 70vh;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-hero, .btn-cta {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .navbar {
+                padding: 0.5rem 1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light" aria-label="Main navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-utensils me-2"></i>The Dining Room
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="home.html" aria-current="page">
+                            <i class="fas fa-home"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fas fa-user-circle"></i>Account
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-concierge-bell"></i>Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="food-order.html"><i class="fas fa-utensils me-2"></i>Food Order</a></li>
+                            <li><a class="dropdown-item" href="table-booking.html"><i class="fas fa-chair me-2"></i>Table Booking</a></li>
+                            <li><a class="dropdown-item" href="event-booking.html"><i class="fas fa-calendar-alt me-2"></i>Event Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="restaurants.html">
+                            <i class="fas fa-store"></i>Restaurants
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            <i class="fas fa-info-circle"></i>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-envelope"></i>Contact
+                        </a>
+                    </li>
+                </ul>
+                <div class="navbar-buttons d-flex">
+                    <a href="login.html" class="btn btn-login me-2">
+                        <i class="fas fa-sign-in-alt me-1"></i>Log In
+                    </a>
+                    <a href="registeration.html" class="btn btn-signup">
+                        <i class="fas fa-user-plus me-1"></i>Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Experience Culinary Excellence</h1>
+                <p>Discover the perfect blend of flavors, ambiance, and hospitality at The Dining Room. Book your table, order delicious food, or host your special event with us.</p>
+                <a href="#restaurants" class="btn btn-hero">Discover Restaurants</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dining Experience">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-chair"></i>
+                            </div>
+                            <h3>Table Booking</h3>
+                            <p>Reserve your table for an unforgettable dining experience. Choose your preferred time and enjoy our exquisite menu in a sophisticated atmosphere.</p>
+                            <a href="table-booking.html" class="btn btn-outline-orange">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Food Delivery">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-motorcycle"></i>
+                            </div>
+                            <h3>Food Delivery</h3>
+                            <p>Enjoy our gourmet dishes in the comfort of your home. Fast, reliable delivery with the same quality you'd experience in our restaurant.</p>
+                            <a href="food-order.html" class="btn btn-outline-orange">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Event Booking">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3>Event Booking</h3>
+                            <p>Host your special occasions with us. From corporate events to weddings, we provide exceptional service and customized menus.</p>
+                            <a href="event-booking.html" class="btn btn-outline-orange">Plan Event</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Restaurants Section -->
+    <section class="featured-restaurants" id="restaurants">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Restaurants</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="restaurant-card">
+                        <div class="restaurant-img">
+                            <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Bella Italia">
+                        </div>
+                        <div class="restaurant-content">
+                            <h3>Bella Italia</h3>
+                            <div class="restaurant-type">Italian Cuisine</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(4.7)</span>
+                            </div>
+                            <p>Authentic Italian cuisine with homemade pasta, wood-fired pizzas, and an extensive wine selection.</p>
+                            <div class="restaurant-location">
+                                <i class="fas fa-map-marker-alt"></i> 123 Gourmet Street, Foodie City
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="restaurant-card">
+                        <div class="restaurant-img">
+                            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sakura Sushi">
+                        </div>
+                        <div class="restaurant-content">
+                            <h3>Sakura Sushi</h3>
+                            <div class="restaurant-type">Japanese Cuisine</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(4.9)</span>
+                            </div>
+                            <p>Premium sushi and sashimi prepared by master chefs using the freshest ingredients flown in daily.</p>
+                            <div class="restaurant-location">
+                                <i class="fas fa-map-marker-alt"></i> 45 Harbor View, Foodie City
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="restaurant-card">
+                        <div class="restaurant-img">
+                            <img src="https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Le Petit Bistro">
+                        </div>
+                        <div class="restaurant-content">
+                            <h3>Le Petit Bistro</h3>
+                            <div class="restaurant-type">French Cuisine</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(4.5)</span>
+                            </div>
+                            <p>Classic French dishes with a modern twist in an intimate, romantic setting perfect for date nights.</p>
+                            <div class="restaurant-location">
+                                <i class="fas fa-map-marker-alt"></i> 78 Rue de Gourmet, Foodie City
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="restaurant-card">
+                        <div class="restaurant-img">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="The Grill House">
+                        </div>
+                        <div class="restaurant-content">
+                            <h3>The Grill House</h3>
+                            <div class="restaurant-type">Steakhouse & BBQ</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(4.6)</span>
+                            </div>
+                            <p>Premium cuts of meat cooked to perfection over open flame grills. A carnivore's paradise.</p>
+                            <div class="restaurant-location">
+                                <i class="fas fa-map-marker-alt"></i> 210 Meat Lovers Blvd, Foodie City
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="restaurants.html" class="btn btn-orange">View All Restaurants</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Menu Section -->
+    <section class="featured-menu" id="menu">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Menu</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Steak Dish">
+                        </div>
+                        <div class="menu-content">
+                            <h3>Grilled Ribeye Steak</h3>
+                            <p>Premium cut with roasted vegetables and signature sauce</p>
+                            <div class="price">$32.99</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img">
+                            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1371&q=80" alt="Pasta Dish">
+                        </div>
+                        <div class="menu-content">
+                            <h3>Truffle Pasta</h3>
+                            <p>Handmade pasta with wild mushrooms and truffle oil</p>
+                            <div class="price">$24.99</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1381&q=80" alt="Salmon Dish">
+                        </div>
+                        <div class="menu-content">
+                            <h3>Pan-Seared Salmon</h3>
+                            <p>Fresh salmon with lemon butter sauce and seasonal greens</p>
+                            <div class="price">$28.99</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img">
+                            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" alt="Dessert">
+                        </div>
+                        <div class="menu-content">
+                            <h3>Chocolate Soufflé</h3>
+                            <p>Warm chocolate soufflé with vanilla bean ice cream</p>
+                            <div class="price">$12.99</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="food-order.html" class="btn btn-orange">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">What Our Guests Say</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The Dining Room exceeded all our expectations. The food was exceptional, and the service was impeccable. We'll definitely be back!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                            </div>
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Food Critic</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "We hosted our company dinner here, and it was perfect. The event team handled everything flawlessly. Highly recommended for business events."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Chen">
+                            </div>
+                            <div class="author-info">
+                                <h4>Michael Chen</h4>
+                                <p>CEO, TechSolutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The food delivery arrived hot and exactly on time. It tasted just as good as dining in the restaurant. Fantastic service!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Rodriguez">
+                            </div>
+                            <div class="author-info">
+                                <h4>Emily Rodriguez</h4>
+                                <p>Regular Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2>Ready to Experience The Dining Room?</h2>
+            <p>Whether you're looking for a romantic dinner, a family gathering, or a corporate event, we have the perfect solution for you.</p>
+            <a href="table-booking.html" class="btn btn-cta">Book Your Table Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <a href="#" class="footer-logo"><i class="fas fa-utensils me-2"></i>The Dining Room</a>
+                        <p>Experience culinary excellence in an elegant atmosphere. Our restaurant offers the finest dining experience with exceptional service.</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-yelp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="food-order.html">Menu</a></li>
+                            <li><a href="restaurants.html">Restaurants</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="table-booking.html">Dining</a></li>
+                            <li><a href="food-order.html">Delivery</a></li>
+                            <li><a href="event-booking.html">Events</a></li>
+                            <li><a href="catering.html">Catering</a></li>
+                            <li><a href="gift-cards.html">Gift Cards</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h3>Contact Us</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Gourmet Avenue, Foodie City, FC 12345</p>
+                        <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
+                        <p><i class="fas fa-envelope"></i> info@thediningroom.com</p>
+                        <p><i class="fas fa-clock"></i> Mon-Fri: 11AM - 10PM<br>Sat-Sun: 10AM - 11PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 The Dining Room. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Document ready function
+        $(document).ready(function() {
+            // Mark hero as loaded for animations
+            $('.hero').addClass('loaded');
+            
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                const navbar = $('.navbar');
+                if ($(window).scrollTop() > 10) {
+                    navbar.addClass('scrolled');
+                } else {
+                    navbar.removeClass('scrolled');
+                }
+                
+                // Show/hide scroll to top button
+                if ($(this).scrollTop() > 300) {
+                    $('.scroll-top').addClass('active');
+                } else {
+                    $('.scroll-top').removeClass('active');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                
+                $('html, body').animate(
+                    {
+                        scrollTop: $($(this).attr('href')).offset().top - 70,
+                    },
+                    500,
+                    'linear'
+                );
+            });
+            
+            // Scroll to top button
+            $('.scroll-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 500);
+            });
+            
+            // Animate elements when they come into view
+            function animateOnScroll() {
+                $('.service-card, .menu-card, .testimonial-card, .restaurant-card').each(function() {
+                    const cardPosition = $(this).offset().top;
+                    const scrollPosition = $(window).scrollTop() + $(window).height() - 100;
+                    
+                    if (scrollPosition > cardPosition) {
+                        $(this).addClass('animate');
+                    }
+                });
+            }
+            
+            // Run once on page load
+            animateOnScroll();
+            
+            // Run on scroll
+            $(window).scroll(function() {
+                animateOnScroll();
+            });
+            
+            // Dropdown hover effect
+            $('.dropdown').hover(function() {
+                $(this).find('.dropdown-menu').stop(true, true).fadeIn(200);
+            }, function() {
+                $(this).find('.dropdown-menu').stop(true, true).fadeOut(200);
+            });
+            
+            // Hero hover effects
+            $('.hero').hover(
+                function() {
+                    $(this).find('h1').css('transform', 'scale(1)');
+                },
+                function() {
+                    $(this).find('h1').css('transform', 'scale(0.95)');
+                }
+            );
+            
+            // Service card hover effects
+            $('.service-card').hover(
+                function() {
+                    $(this).find('.service-icon').css('transform', 'rotate(15deg) scale(1.2)');
+                    $(this).find('h3').css('color', 'var(--orange)');
+                },
+                function() {
+                    $(this).find('.service-icon').css('transform', 'rotate(0) scale(1)');
+                    $(this).find('h3').css('color', 'var(--dark)');
+                }
+            );
+            
+            // Restaurant card hover effects
+            $('.restaurant-card').hover(
+                function() {
+                    $(this).find('h3').css('color', 'var(--orange)');
+                },
+                function() {
+                    $(this).find('h3').css('color', 'var(--dark)');
+                }
+            );
+            
+            // Menu card hover effects
+            $('.menu-card').hover(
+                function() {
+                    $(this).find('h3').css('color', 'var(--orange)');
+                    $(this).find('.price').css('transform', 'scale(1.1)');
+                },
+                function() {
+                    $(this).find('h3').css('color', 'var(--dark)');
+                    $(this).find('.price').css('transform', 'scale(1)');
+                }
+            );
+            
+            // Testimonial card hover effects
+            $('.testimonial-card').hover(
+                function() {
+                    $(this).find('.author-img').css('transform', 'rotate(10deg)');
+                    $(this).find('.author-info h4').css('color', 'var(--orange)');
+                },
+                function() {
+                    $(this).find('.author-img').css('transform', 'rotate(0)');
+                    $(this).find('.author-info h4').css('color', 'white');
+                }
+            );
+            
+            // Footer link hover effects
+            $('.footer-links a').hover(
+                function() {
+                    $(this).css('color', 'var(--orange)').css('transform', 'translateX(5px)');
+                },
+                function() {
+                    $(this).css('color', '#aaa').css('transform', 'translateX(0)');
+                }
+            );
+            
+            // Social icon hover effects
+            $('.social-icons a').hover(
+                function() {
+                    $(this).css('background-color', 'var(--orange)').css('transform', 'translateY(-3px) rotate(10deg)');
+                },
+                function() {
+                    $(this).css('background-color', 'rgba(255, 255, 255, 0.1)').css('transform', 'translateY(0) rotate(0)');
+                }
+            );
+            
+            // Footer contact hover effects
+            $('.footer-contact p').hover(
+                function() {
+                    $(this).css('color', 'white');
+                    $(this).find('i').css('transform', 'rotate(15deg)');
+                },
+                function() {
+                    $(this).css('color', '#aaa');
+                    $(this).find('i').css('transform', 'rotate(0)');
+                }
+            );
+            
+            // Button hover effects
+            $('.btn-hero, .btn-cta, .btn-login, .btn-signup').hover(
+                function() {
+                    $(this).find('i').css('transform', 'translateX(3px)');
+                },
+                function() {
+                    $(this).find('i').css('transform', 'translateX(0)');
+                }
+            );
+        });
+    </script>
+</body>
+</html>

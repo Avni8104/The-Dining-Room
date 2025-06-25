@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create an account with The Dining Room for food ordering, table booking, and event reservations">
+    <title>Create Account - The Dining Room</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Gorditas -->
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <style>
+        :root {
+            --off-white: #f8f4e9;
+            --orange: #ff7b25;
+            --orange-light: rgba(255, 123, 37, 0.3);
+            --orange-lighter: rgba(255, 123, 37, 0.1);
+            --dark: #333;
+            --gray: #6c757d;
+            --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --nav-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--off-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--orange);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Enhanced Navigation Bar */
+        .navbar {
+            background-color: var(--off-white);
+            box-shadow: var(--nav-shadow);
+            padding: 0.5rem 2rem;
+            font-family: 'Gorditas', cursive;
+            transition: var(--nav-transition);
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.3rem 2rem;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--orange);
+            display: flex;
+            align-items: center;
+            transition: var(--nav-transition);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.03);
+            text-shadow: 0 2px 4px rgba(255, 123, 37, 0.2);
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: var(--nav-transition);
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px var(--orange-light);
+            outline: none;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 123, 37, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            transition: var(--nav-transition);
+        }
+        
+        .navbar-toggler:hover .navbar-toggler-icon {
+            transform: rotate(90deg);
+        }
+        
+        .nav-item {
+            position: relative;
+            margin: 0 0.3rem;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            font-weight: 600;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            transition: var(--nav-transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--orange);
+            border-radius: 3px;
+            transition: var(--nav-transition);
+        }
+        
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--orange);
+            background-color: var(--orange-lighter);
+            outline: none;
+        }
+        
+        .nav-link:hover::before,
+        .nav-link:focus::before {
+            width: 60%;
+        }
+        
+        .nav-link.active {
+            color: var(--orange);
+            font-weight: 700;
+        }
+        
+        .nav-link.active::before {
+            width: 60%;
+            background-color: var(--orange);
+        }
+        
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+            transition: var(--nav-transition);
+        }
+        
+        .nav-link:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Navigation Buttons */
+        .btn-login {
+            background-color: transparent;
+            color: var(--orange);
+            border: 2px solid var(--orange);
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 700;
+            transition: var(--nav-transition);
+            margin: 0 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-login:hover,
+        .btn-login:focus {
+            background-color: var(--orange);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 123, 37, 0.3);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .btn-signup {
+            background-color: var(--orange);
+            color: white;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 700;
+            transition: var(--nav-transition);
+            border: 2px solid var(--orange);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-signup:hover,
+        .btn-signup:focus {
+            background-color: #e66a1a;
+            border-color: #e66a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 123, 37, 0.3);
+        }
+        
+        .btn-signup:active {
+            transform: translateY(0);
+        }
+        
+        /* Button hover effects */
+        .btn-login::before,
+        .btn-signup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-login:hover::before,
+        .btn-signup:hover::before {
+            left: 100%;
+        }
+        
+        /* Center the navigation links */
+        .navbar-nav {
+            align-items: center;
+        }
+        
+        /* Dropdown menu styling */
+        .dropdown-menu {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item {
+            padding: 0.5rem 1.5rem;
+            transition: var(--nav-transition);
+            font-weight: 500;
+        }
+        
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: var(--orange-lighter);
+            color: var(--orange);
+        }
+        
+        /* Background container */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        /* Main orange ring with enhanced animation */
+        .orange-ring {
+            position: absolute;
+            width: 150vmax;
+            height: 150vmax;
+            border: 30px solid var(--orange-light);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: rotateRing 60s linear infinite, pulseRing 10s ease-in-out infinite alternate;
+            opacity: 0.6;
+        }
+        
+        .orange-ring::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 25px solid var(--orange-light);
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            transform: scale(0.8);
+            opacity: 0.4;
+            animation: rotateRingReverse 40s linear infinite, pulseRing 8s ease-in-out infinite alternate 1s;
+        }
+        
+        .orange-ring::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 20px solid var(--orange-light);
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            transform: scale(0.6);
+            opacity: 0.2;
+            animation: rotateRing 30s linear infinite, pulseRing 6s ease-in-out infinite alternate 2s;
+        }
+        
+        /* Small orange rings with enhanced effects */
+        .small-orange-ring {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 15px solid var(--orange);
+            border-radius: 50%;
+            z-index: 0;
+            animation: rotateSlow 20s linear infinite, float 8s ease-in-out infinite alternate;
+            opacity: 0.7;
+        }
+        
+        .small-orange-ring-1 {
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        
+        .small-orange-ring-2 {
+            bottom: 15%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+        
+        .small-orange-ring-3 {
+            top: 25%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        
+        .small-orange-ring-4 {
+            bottom: 25%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+        
+        /* Big orange rings with enhanced effects */
+        .big-orange-ring {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 25px solid var(--orange);
+            border-radius: 50%;
+            z-index: 0;
+            animation: rotateSlowReverse 30s linear infinite, float 12s ease-in-out infinite alternate;
+            opacity: 0.6;
+        }
+        
+        .big-orange-ring-1 {
+            top: 20%;
+            right: 25%;
+            animation-delay: 2s;
+        }
+        
+        .big-orange-ring-2 {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        /* Floating dots */
+        .floating-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--orange-light);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite alternate, scale 8s ease-in-out infinite alternate;
+        }
+        
+        .floating-dot-1 {
+            top: 15%;
+            right: 30%;
+            animation-delay: 0s;
+        }
+        
+        .floating-dot-2 {
+            bottom: 25%;
+            left: 30%;
+            animation-delay: 2s;
+        }
+        
+        .floating-dot-3 {
+            top: 40%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+        
+        .floating-dot-4 {
+            bottom: 10%;
+            right: 20%;
+            animation-delay: 6s;
+        }
+        
+        /* Animated lines */
+        .animated-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--orange-light), transparent);
+            animation: slide 20s linear infinite;
+            opacity: 0.4;
+        }
+        
+        .animated-line-1 {
+            top: 30%;
+            left: -100px;
+            width: 200px;
+            transform: rotate(45deg);
+            animation-delay: 0s;
+        }
+        
+        .animated-line-2 {
+            bottom: 40%;
+            right: -100px;
+            width: 250px;
+            transform: rotate(-30deg);
+            animation-delay: 5s;
+        }
+        
+        /* Animation keyframes */
+        @keyframes rotateRing {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        
+        @keyframes rotateRingReverse {
+            from {
+                transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(0.8) rotate(-360deg);
+            }
+        }
+        
+        @keyframes rotateSlow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes rotateSlowReverse {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+        
+        @keyframes pulseRing {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-20px) translateX(10px); }
+        }
+        
+        @keyframes scale {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.5); }
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100vw) rotate(45deg); }
+        }
+        
+        /* Glowing orb effect - enhanced */
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--orange-lighter) 0%, rgba(248,244,233,0) 70%);
+            filter: blur(40px);
+            animation: pulse 6s infinite alternate, moveOrb 20s linear infinite;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        .glow-orb-1 {
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+        
+        .glow-orb-2 {
+            bottom: -150px;
+            left: -150px;
+            animation-delay: 3s;
+        }
+        
+        .glow-orb-3 {
+            top: 50%;
+            left: 10%;
+            width: 400px;
+            height: 400px;
+            animation-delay: 2s;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.2; }
+            100% { transform: scale(1.2); opacity: 0.5; }
+        }
+        
+        @keyframes moveOrb {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(50px, -30px); }
+            50% { transform: translate(0, -50px); }
+            75% { transform: translate(-30px, 20px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        /* Main content area */
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        /* Registration container */
+        .register-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            z-index: 10;
+            position: relative;
+            margin: 30px auto;
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .register-header h1 {
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .register-header p {
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+        
+        .form-control {
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            padding-left: 45px;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(255, 123, 37, 0.2);
+            border-color: var(--orange);
+            outline: none;
+        }
+        
+        .input-group-text {
+            position: absolute;
+            z-index: 10;
+            height: 50px;
+            width: 50px;
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            transition: all 0.3s;
+        }
+        
+        .btn-register {
+            background: var(--orange);
+            border: none;
+            color: white;
+            height: 50px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 123, 37, 0.3);
+        }
+        
+        .btn-register:hover,
+        .btn-register:focus {
+            background: #e66a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 123, 37, 0.4);
+            outline: none;
+        }
+        
+        .btn-register:active {
+            transform: translateY(0);
+        }
+        
+        .password-strength {
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            background: #ff0000;
+            transition: all 0.3s;
+        }
+        
+        .form-text {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* Mobile menu styling */
+        @media (max-width: 992px) {
+            .navbar-collapse {
+                background-color: var(--off-white);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-item {
+                margin: 0.3rem 0;
+            }
+            
+            .nav-link {
+                padding: 0.8rem 1rem;
+            }
+            
+            .navbar-buttons {
+                margin-top: 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
+            }
+            
+            .btn-login, .btn-signup {
+                width: 100%;
+                text-align: center;
+                margin: 0;
+            }
+            
+            .dropdown-menu {
+                margin-left: 1rem;
+                width: calc(100% - 2rem);
+                box-shadow: none;
+                border-left: 3px solid var(--orange-light);
+            }
+            
+            /* Adjust registration container for mobile */
+            .register-container {
+                padding: 25px 20px;
+                margin: 20px auto;
+            }
+            
+            .register-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .form-control {
+                height: 45px;
+                padding-left: 40px;
+            }
+            
+            .input-group-text {
+                height: 45px;
+                width: 40px;
+            }
+            
+            .btn-register {
+                height: 45px;
+            }
+            
+            .small-orange-ring {
+                width: 80px;
+                height: 80px;
+                border-width: 10px;
+            }
+            
+            .big-orange-ring {
+                width: 200px;
+                height: 200px;
+                border-width: 15px;
+            }
+            
+            .orange-ring {
+                border-width: 15px;
+            }
+            
+            .orange-ring::before {
+                border-width: 10px;
+            }
+            
+            .orange-ring::after {
+                border-width: 8px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 15px;
+            }
+            
+            .navbar-brand {
+                font-size: 24px;
+            }
+            
+            .register-container {
+                margin: 15px auto;
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Background elements -->
+    <div class="bg-container" aria-hidden="true">
+        <!-- Main orange ring -->
+        <div class="orange-ring"></div>
+        
+        <!-- Small orange rings -->
+        <div class="small-orange-ring small-orange-ring-1"></div>
+        <div class="small-orange-ring small-orange-ring-2"></div>
+        <div class="small-orange-ring small-orange-ring-3"></div>
+        <div class="small-orange-ring small-orange-ring-4"></div>
+        
+        <!-- Big orange rings -->
+        <div class="big-orange-ring big-orange-ring-1"></div>
+        <div class="big-orange-ring big-orange-ring-2"></div>
+        
+        <!-- Floating dots -->
+        <div class="floating-dot floating-dot-1"></div>
+        <div class="floating-dot floating-dot-2"></div>
+        <div class="floating-dot floating-dot-3"></div>
+        <div class="floating-dot floating-dot-4"></div>
+        
+        <!-- Animated lines -->
+        <div class="animated-line animated-line-1"></div>
+        <div class="animated-line animated-line-2"></div>
+        
+        <!-- Glow orbs -->
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light" aria-label="Main navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-utensils me-2"></i>The Dining Room
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="home.html" aria-current="page">
+                            <i class="fas fa-home"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fas fa-user-circle"></i>Account
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-concierge-bell"></i>Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="food-order.html"><i class="fas fa-utensils me-2"></i>Food Order</a></li>
+                            <li><a class="dropdown-item" href="table-booking.html"><i class="fas fa-chair me-2"></i>Table Booking</a></li>
+                            <li><a class="dropdown-item" href="event-booking.html"><i class="fas fa-calendar-alt me-2"></i>Event Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            <i class="fas fa-info-circle"></i>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-envelope"></i>Contact
+                        </a>
+                    </li>
+                </ul>
+                <div class="navbar-buttons d-flex">
+                    <a href="login.html" class="btn btn-login me-2">
+                        <i class="fas fa-sign-in-alt me-1"></i>Log In
+                    </a>
+                    <a href="registeration.html" class="btn btn-signup">
+                        <i class="fas fa-user-plus me-1"></i>Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main id="main-content">
+        <!-- Registration container -->
+        <div class="register-container animate__animated animate__fadeIn">
+            <header class="register-header">
+                <h1>Create Your Account</h1>
+                <p>Join The Dining Room to access all our services</p>
+            </header>
+            
+            <form id="registrationForm" novalidate>
+                <div class="mb-3">
+                    <label for="name" class="form-label visually-hidden">Full Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="name" placeholder="Full Name" required aria-required="true">
+                    </div>
+                    <div class="invalid-feedback">Please enter your full name</div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="phoneNumber" class="form-label visually-hidden">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-phone" aria-hidden="true"></i></span>
+                            <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" required aria-required="true">
+                        </div>
+                        <div class="invalid-feedback">Please enter a valid phone number</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label visually-hidden">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                            <input type="email" class="form-control" id="email" placeholder="Email Address" required aria-required="true">
+                        </div>
+                        <div class="invalid-feedback">Please enter a valid email address</div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="address" class="form-label visually-hidden">Street Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="address" placeholder="Street Address" required aria-required="true">
+                    </div>
+                    <div class="invalid-feedback">Please enter your street address</div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="username" class="form-label visually-hidden">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user-tag" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="username" placeholder="Create Username" required aria-required="true" pattern="[A-Za-z0-9]{6,}">
+                        </div>
+                        <div class="form-text">Minimum 6 characters, letters and numbers only</div>
+                        <div class="invalid-feedback">Username must be at least 6 characters (letters and numbers only)</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label visually-hidden">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" id="password" placeholder="Create Password" required aria-required="true" minlength="8">
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-meter" id="passwordStrength"></div>
+                        </div>
+                        <div class="form-text">Minimum 8 characters with uppercase, lowercase, and number</div>
+                        <div class="invalid-feedback">Password must be at least 8 characters with uppercase, lowercase, and number</div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label visually-hidden">Confirm Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required aria-required="true">
+                    </div>
+                    <div class="form-text" id="passwordMatchText"></div>
+                    <div class="invalid-feedback">Passwords must match</div>
+                </div>
+                
+                <button type="submit" class="btn btn-register w-100 mb-3">
+                    <span class="register-text">Create Account</span>
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+                
+                <div class="text-center">
+                    Already have an account? <a href="login.html" class="text-decoration-none">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Add smooth hover effect to dropdowns
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('mouseenter', function() {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                dropdownMenu.classList.add('show');
+            });
+            
+            dropdown.addEventListener('mouseleave', function() {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                dropdownMenu.classList.remove('show');
+            });
+        });
+
+        $(document).ready(function() {
+            // Password strength indicator
+            $('#password').on('input', function() {
+                const password = $(this).val();
+                let strength = 0;
+                
+                // Length check
+                if (password.length >= 8) strength += 1;
+                if (password.length >= 12) strength += 1;
+                
+                // Character type checks
+                if (/[A-Z]/.test(password)) strength += 1;
+                if (/[0-9]/.test(password)) strength += 1;
+                if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+                
+                // Update strength meter
+                const strengthMeter = $('#passwordStrength');
+                const colors = ['#ff0000', '#ff5e00', '#ffbb00', '#a4ff00', '#00ff00'];
+                const width = (strength / 5) * 100;
+                
+                strengthMeter.css('width', width + '%');
+                strengthMeter.css('background', colors[strength - 1] || '#ff0000');
+            });
+            
+            // Password match checker
+            $('#confirmPassword').on('input', function() {
+                const password = $('#password').val();
+                const confirmPassword = $(this).val();
+                const matchText = $('#passwordMatchText');
+                
+                if (confirmPassword.length === 0) {
+                    matchText.text('');
+                } else if (password === confirmPassword) {
+                    matchText.text('Passwords match!').css('color', 'green');
+                    $(this).removeClass('is-invalid').addClass('is-valid');
+                } else {
+                    matchText.text('Passwords do not match').css('color', 'red');
+                    $(this).removeClass('is-valid').addClass('is-invalid');
+                }
+            });
+            
+            // Form validation and submission
+            $('#registrationForm').submit(function(e) {
+                e.preventDefault();
+                
+                const form = $(this);
+                const btn = form.find('button[type="submit"]');
+                const registerText = btn.find('.register-text');
+                const spinner = btn.find('.spinner-border');
+                
+                // Validate form
+                if (form[0].checkValidity() === false) {
+                    e.stopPropagation();
+                    form.addClass('was-validated');
+                    return;
+                }
+                
+                // Check password match
+                if ($('#password').val() !== $('#confirmPassword').val()) {
+                    $('#confirmPassword').addClass('is-invalid');
+                    return;
+                }
+                
+                // Show loading state
+                registerText.addClass('d-none');
+                spinner.removeClass('d-none');
+                btn.prop('disabled', true);
+                
+                // Simulate API call
+                setTimeout(function() {
+                    // Hide loading state
+                    registerText.removeClass('d-none');
+                    spinner.addClass('d-none');
+                    btn.prop('disabled', false);
+                    
+                    // Here you would typically handle the actual registration
+                    console.log('Registration form submitted');
+                    
+                    // Add a success effect
+                    btn.css('background', '#28a745');
+                    btn.find('.register-text').text('Registration Successful!');
+                    
+                    setTimeout(function() {
+                        // Redirect to dashboard or confirmation page
+                        window.location.href = 'welcome.html';
+                    }, 1500);
+                }, 2000);
+            });
+            
+            // Input focus effects
+            $('.form-control').focus(function() {
+                $(this).parent().find('.input-group-text').css('color', 'var(--orange)');
+            }).blur(function() {
+                $(this).parent().find('.input-group-text').css('color', 'var(--gray)');
+            });
+            
+            // Add random floating elements dynamically
+            function createFloatingElement() {
+                const types = ['dot', 'ring'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                const size = Math.floor(Math.random() * 30) + 10;
+                const posX = Math.floor(Math.random() * 100);
+                const posY = Math.floor(Math.random() * 100);
+                const duration = Math.floor(Math.random() * 30) + 20;
+                const delay = Math.floor(Math.random() * 10);
+                
+                const element = document.createElement('div');
+                element.className = `floating-${type}`;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.left = `${posX}%`;
+                element.style.top = `${posY}%`;
+                element.style.animationDuration = `${duration}s`;
+                element.style.animationDelay = `${delay}s`;
+                element.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                if (type === 'dot') {
+                    element.style.backgroundColor = `rgba(255, 123, 37, ${Math.random() * 0.3 + 0.1})`;
+                } else {
+                    element.style.border = `${Math.floor(size/10)}px solid rgba(255, 123, 37, ${Math.random() * 0.3 + 0.1})`;
+                }
+                
+                document.querySelector('.bg-container').appendChild(element);
+                
+                // Remove element after animation completes to prevent DOM overload
+                setTimeout(() => {
+                    element.remove();
+                }, duration * 1000);
+            }
+            
+            // Create random floating elements periodically
+            setInterval(createFloatingElement, 1000);
+        });
+    </script>
+</body>
+</html>
